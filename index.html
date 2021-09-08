@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        window.sessionStorage.clear();
+        if(localStorage.getItem("collection")==null){
+            let xmlhttp = new XMLHttpRequest();
+            let urljson = "./json/mydecks.json";
+
+            xmlhttp.onreadystatechange=function (){
+                if(this.readyState==4 && this.status==200){
+                    let collection = JSON.parse(this.responseText);
+                    loadCollection(collection);
+                }
+            }
+
+            xmlhttp.open("GET", urljson, true); <!-- la funzione non blocca, è asincrona, se avesimo messo false avremmo dovuto aspettare che teminasse la chiamata per andare avanti -->
+            xmlhttp.send();
+        }
+
+        window.onload
+
+        function loadCollection(item){
+            localStorage.setItem("collection",JSON.stringify(item));
+        }
+
+        function displayCollection(){
+            let decks=JSON.parse(localStorage.getItem("collection")).decks;
+            for(let i=0;i<decks.length;i++){
+                loadDeck(decks[i].name,decks[i].list);
+            }
+        }
+
+        function loadDeck(name,list){
+            let div=document.createElement("div");
+            let pName=document.createElement("p");
+            pName.innerHTML=name
+            div.appendChild(pName);
+            insertCreatures(div,list);
+            document.getElementById("main").appendChild(div);
+
+        }
+
+        function insertCreatures(div,decklist){
+            let creatures=decklist.creatures;
+            for(let i=0;i<creatures.length;i++){
+                let entry=document.createElement("p");
+                entry.innerHTML=creatures[i].name+"    "+creatures[i].qty;
+                div.appendChild(entry);
+            }
+        }
+    </script>
+</head>
+<body>
+<div id="main">
+
+</div>
+</body>
+</html>
+<script>
+    displayCollection();
+</script>

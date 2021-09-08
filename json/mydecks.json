@@ -1,0 +1,29 @@
+{
+  "decks":
+  [
+    {
+      "name":"ur murkavan",
+      "list":
+      {
+        "creatures":
+        [
+          {
+            "name":"Dragon's Rage Channeler",
+            "qty":"4",
+            "buyPrice":"3"
+          },
+          {
+            "name":"Murktide Regent",
+            "qty":"4",
+            "buyPrice":"25"
+          },
+          {
+            "name":"Ragavan, Nimble Pilferer",
+            "qty":"4",
+            "buyPrice":"60"
+          }
+        ]
+      }
+    }
+  ]
+}
